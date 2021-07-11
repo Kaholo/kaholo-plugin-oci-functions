@@ -1,0 +1,19 @@
+{
+  "name": "kaholo-plugin-oci-functions",
+  "version": "1.0.0",
+  "description": "Kaholo plugin for Oracle Cloud Infrastructure(OCI) Functions Service",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kaholo Team(Amit Alon)",
+  "license": "ISC",
+  "dependencies": {
+    "oci-identity": "^1.22.1",
+    "oci-common": "^1.22.1",
+    "oci-functions": "^1.22.1",
+    "oci-artifacts": "^1.22.1",
+    "oci-core": "^1.22.1",
+    "oci-apmcontrolplane": "^1.22.1"
+  }
+}

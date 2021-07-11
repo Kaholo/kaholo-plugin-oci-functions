@@ -1,0 +1,226 @@
+{
+    "name": "OCI-Functions",
+    "type": "executer",
+    "execProgram": "node",
+    "main": "app.js",
+    "exposeRoute": true,
+    "imgUrl": "logo.png",
+    "version": "1.0.0",
+    "description": "Integration with Oracle Cloud(OCI) Functions Service",
+    "settings": [
+        {
+            "name":"privateKey",
+            "viewName":"Private key",
+            "type":"vault"
+        },
+        {
+            "name":"userId",
+            "viewName":"User Id",
+            "type":"string"
+        },
+        {
+            "name":"tenancyId",
+            "viewName":"Tenancy Id",
+            "type":"string"
+        },
+        {
+            "name":"fingerprint",
+            "viewName":"Fingerprint",
+            "type":"vault"
+        },
+        {
+            "name":"region",
+            "viewName":"Region",
+            "type":"string"
+        }
+    ],
+    "methods":[
+        {
+            "name":"createApplication",
+            "viewName":"Create Application",
+            "params": [
+                {
+                    "name": "compartment",
+                    "viewName": "Compartment",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listCompartments"
+                },
+                {
+                    "name": "name",
+                    "viewName": "Application Name",
+                    "type": "string"
+                },
+                {
+                    "name": "vcn",
+                    "viewName": "VCN",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listVCN"
+                },
+                {
+                    "name": "subnets",
+                    "viewName": "Subnets",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listSubnets"
+                },
+                {
+                    "name": "config",
+                    "viewName": "Config",
+                    "type": "text"
+                },
+                {
+                    "name": "syslogUrl",
+                    "viewName": "SyslLog URL",
+                    "type": "string"
+                },
+                {
+                    "name": "enableTracing",
+                    "viewName": "Enable Tracing",
+                    "type": "boolean"
+                },
+                {
+                    "name": "apmDomain",
+                    "viewName": "Tracing APM Domain",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listApmDomains"
+                }
+            ]
+        },
+        {
+            "name":"createFunction",
+            "viewName":"Create Function",
+            "params": [
+                {
+                    "name": "compartment",
+                    "viewName": "Compartment",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listCompartments"
+                },
+                {
+                    "name": "app",
+                    "viewName": "Application",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listApps"
+                },
+                {
+                    "name": "name",
+                    "viewName": "Function Name",
+                    "type": "string"
+                },
+                {
+                    "name": "imageRepository",
+                    "viewName": "Image Repository",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listRepos"
+                },
+                {
+                    "name": "image",
+                    "viewName": "Image",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listRepoImages"
+                },
+                {
+                    "name": "config",
+                    "viewName": "Config",
+                    "type": "text"
+                },
+                {
+                    "name": "memSize",
+                    "viewName": "Max Memory Used(MBs)",
+                    "type": "options",
+                    "options": [
+                        {
+                            "id": "128",
+                            "name": "128"
+                        },
+                        {
+                            "id": "256",
+                            "name": "256"
+                        },
+                        {
+                            "id": "512",
+                            "name": "512"
+                        },
+                        {
+                            "id": "1024",
+                            "name": "1024"
+                        }
+                    ]
+                },
+                {
+                    "name": "timeout",
+                    "viewName": "Timeout(In Seconds)",
+                    "type": "string"
+                },
+                {
+                    "name": "enableTracing",
+                    "viewName": "Enable Tracing",
+                    "type": "boolean"
+                }
+            ]
+        },
+        {
+            "name":"invokeFunction",
+            "viewName":"Invoke Function",
+            "params": [
+                {
+                    "name": "compartment",
+                    "viewName": "Compartment",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listCompartments"
+                },
+                {
+                    "name": "app",
+                    "viewName": "Application",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listApps"
+                },
+                {
+                    "name": "function",
+                    "viewName": "Function",
+                    "type": "autocomplete",
+                    "autocompleteType":"function",
+                    "functionName":"listFunctions"
+                },
+                {
+                    "name": "body",
+                    "viewName": "Invoke Function Body",
+                    "type": "text"
+                },
+                {
+                    "name": "fnIntent",
+                    "viewName": "Function Intent",
+                    "type": "options",
+                    "options": [
+                        {
+                            "id": "none",
+                            "name": "none"
+                        },
+                        {
+                            "id": "httprequest",
+                            "name": "httprequest"
+                        },
+                        {
+                            "id": "cloudevent",
+                            "name": "cloudevent"
+                        }
+                    ]
+                },
+                {
+                    "name": "detached",
+                    "viewName": "Invoke Detached",
+                    "type": "boolean"
+                }
+            ]
+        }
+    ]
+}
