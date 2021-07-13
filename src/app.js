@@ -43,15 +43,17 @@ async function createFunction(action, settings) {
 }
 
 async function invokeFunction(action, settings) {
+  const functionId = parsers.autocomplete(action.params.function);
   const client = getFunctionsInvokeClient(settings);
-  let bodyStream = undefined;
-  if (action.params.body) bodyStream = Readable.from([action.params.body]);
+  const manageClient = getFunctionsManagementClient(settings);
+  const invokeEndpoint = (await manageClient.getFunction({functionId})).function.invokeEndpoint;
+  client.endpoint = invokeEndpoint;
 
   return client.invokeFunction({
-    functionId: parsers.autocomplete(action.params.function),
+    functionId,
     fnIntent: action.params.fnIntent === "none" ? undefined : action.params.fnIntent,
     fnInvokeType: action.params.detached ? "detached" : "sync",
-    invokeFunctionBody: bodyStream
+    invokeFunctionBody: action.params.body
   });
 }
 
